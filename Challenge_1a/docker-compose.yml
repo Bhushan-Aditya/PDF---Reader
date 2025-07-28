@@ -1,0 +1,15 @@
+version: '3.8'
+
+services:
+  pdf-structure-extractor:
+    build: .
+    container_name: ocr-pdf-extractor
+    volumes:
+      - ./input:/app/input:ro
+      - ./output:/app/output
+    environment:
+      - PYTHONUNBUFFERED=1
+    restart: unless-stopped
+    ports:
+      - "8000:8000"  # For future API interface
+    command: python ocr_adaptive_processor.py 
